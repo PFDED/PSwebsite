@@ -8,6 +8,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     }
 
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.querySelector(".menu");
+    if (hamburger && menu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            menu.classList.toggle("active");
+        });
+    }
+
+    // Close menu when clicking a link
+    const menuLinks = document.querySelectorAll(".menu a");
+    menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (hamburger && menu) {
+                hamburger.classList.remove("active");
+                menu.classList.remove("active");
+            }
+        });
+    });
+
     // Scroll Observer for Active Nav and Fade animations
     const sections = document.querySelectorAll(".section");
     const menuItems = document.querySelectorAll(".menu li");
