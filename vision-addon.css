@@ -1,0 +1,127 @@
+/* Add after bat.css on vision.html */
+
+.vision-page .vision-gallery-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.vision-page .photo {
+    position: relative;
+    min-height: 220px;
+    background: linear-gradient(135deg, #121212, #1c1c1c);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    content-visibility: auto;
+    contain-intrinsic-size: 360px 460px;
+}
+
+.vision-page .photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.08) 45%, transparent 70%);
+    transform: translateX(-100%);
+    animation: galleryShimmer 1.4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.vision-page .photo.is-loaded::before,
+.vision-page .photo.is-error::before {
+    display: none;
+}
+
+.vision-page .photo img {
+    opacity: 0;
+    transition: opacity 500ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vision-page .photo.is-loaded img {
+    opacity: 1;
+}
+
+.vision-page .photo.is-error {
+    display: none;
+}
+
+@keyframes galleryShimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+#lightbox {
+    isolation: isolate;
+    background: #000;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#lightbox::before {
+    content: "";
+    position: absolute;
+    inset: -28px;
+    z-index: 0;
+    background-image: var(--lightbox-bg);
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    filter: blur(30px) saturate(0.9);
+    transform: scale(1.08);
+    transition: opacity 350ms ease;
+}
+
+#lightbox::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.88) 62%),
+        rgba(0, 0, 0, 0.72);
+}
+
+#lightbox.active::before {
+    opacity: 0.38;
+}
+
+#lightbox img {
+    position: relative;
+    z-index: 2;
+}
+
+#close,
+.nav-btn,
+#lightbox-caption {
+    z-index: 3;
+}
+
+@media (max-width: 768px) {
+    .vision-page .photo {
+        min-height: 260px;
+        contain-intrinsic-size: 320px 420px;
+    }
+
+    #lightbox img {
+        max-width: 92vw;
+        max-height: 76vh;
+    }
+
+    #prev-btn {
+        left: 0.75rem;
+    }
+
+    #next-btn {
+        right: 0.75rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vision-page .photo::before {
+        animation: none;
+    }
+
+    .vision-page .photo img,
+    #lightbox::before {
+        transition: none;
+    }
+}
