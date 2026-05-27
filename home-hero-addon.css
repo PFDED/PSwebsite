@@ -1,0 +1,55 @@
+/* Add after bat.css on index.html */
+
+#home {
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#home .hero-bg {
+    background-image: url("images/home-hero.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: var(--home-bg-opacity, 1);
+    transform: scale(var(--home-bg-scale, 1.04));
+    transform-origin: center;
+    transition: opacity 120ms linear, transform 120ms linear;
+}
+
+#home .hero-bg::before {
+    background:
+        linear-gradient(90deg, rgba(11, 11, 11, 0.88) 0%, rgba(11, 11, 11, 0.48) 58%, rgba(11, 11, 11, 0.28) 100%),
+        linear-gradient(0deg, rgba(11, 11, 11, 0.82) 0%, rgba(11, 11, 11, 0.18) 45%, rgba(11, 11, 11, 0.52) 100%);
+}
+
+#home .home-content {
+    opacity: var(--home-content-opacity, 1);
+    transform: translateY(var(--home-content-y, 0px));
+    transition: opacity 120ms linear, transform 120ms linear;
+}
+
+#portfolio {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+    #home {
+        min-height: 100svh;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    #home .hero-bg {
+        background-position: 62% center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #home .hero-bg,
+    #home .home-content {
+        transition: none;
+    }
+}
